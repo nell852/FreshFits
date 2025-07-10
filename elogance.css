@@ -1,0 +1,609 @@
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #2a0c1b;
+  color: #FF6F00;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background: #0A2540;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.logo span {
+  font-size: 1.8em;
+  font-weight: bold;
+  color:#FF6F00 ;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+nav a {
+  color:#FF6F00;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color:#00d084 ;
+}
+
+.cart {
+  font-weight: bold;
+}
+
+/* ESPACE LANDING */
+.landing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 60px 20px;
+  background: #f0f0f0;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Slogan et contenu comme avant */
+.slogan {
+  flex: 1;
+  font-family: 'Arial Black', sans-serif;
+  color:#FF6F00 ;
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.landing-content {
+  flex: 1;
+}
+
+.landing-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  position: relative;
+  top: -10px;
+}
+
+
+.landing-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  position: relative;
+  top: -20px;
+}
+
+.cta {
+  background-color: #25D366;
+  color: white;
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  position: relative;
+  top: -40px; /* Monte le bouton de 10px */
+}
+
+.cta:hover {
+  background-color: #1ebe57;
+}
+
+/* Zone slider photos */
+.photo-slider {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.slide-track {
+  display: flex;
+  width: calc(300px * 6); /* 6 images (3+3) de 300px */
+  animation: scroll-left 15s linear infinite;
+}
+
+.slide-track img {
+  width: 300px;
+  height: 120px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-300px * 3 - 30px)); /* défilement de 3 images + marge */
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .landing {
+    flex-direction: column;
+    text-align: center;
+    min-height: 600px;
+  }
+  .slogan {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+  }
+  .landing-content {
+    margin-bottom: 150px;
+  }
+  .photo-slider {
+    position: relative;
+    height: 100px;
+    margin-top: 20px;
+  }
+  .slide-track img {
+    width: 90vw;
+    height: auto;
+    margin-right: 10px;
+  }
+  .slide-track {
+    width: auto;
+    animation: scroll-left 15s linear infinite;
+  }
+}
+
+
+/* Responsive: empiler slogan au dessus sur petit écran */
+@media (max-width: 768px) {
+  .landing {
+    flex-direction: column;
+    text-align: center;
+  }
+  .slogan {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+  }
+}
+
+/* Categories Section */
+#categories {
+  #categories {
+  padding: 60px 20px;
+  background: #3a0f27;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 50px;
+}
+
+}
+
+.category {
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.category h2 {
+  font-size: 2em;
+  color: #FF6F00;
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+
+.category:hover h2 {
+  color: #00d084;
+}
+
+.subcategories {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.category:hover .subcategories {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.subcategory {
+  background: #152b45;
+  padding: 20px 30px;
+  border-radius: 8px;
+  transition: transform 0.3s, background 0.3s, color 0.3s;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.subcategory:hover {
+  transform: scale(1.1);
+  background: #1e3b5f;
+  color: #ffd700;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #08121f;
+  color: #aaa;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Sticky header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #08121f;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  .logo {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 10px;
+  }
+
+  nav ul li {
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #223;
+  }
+
+  .landing-content {
+    padding: 30px 20px;
+  }
+
+  .subcategories {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .subcategory {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 28px;
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
+  margin-top: 40px;
+}
+
+.main-photo {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Sous-catégories */
+.subcategories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.subcategory {
+  position: relative;
+  width: calc(20% - 10px);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.subcategory:hover {
+  transform: translateY(-5px);
+}
+
+.subcategory img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+.subcategory:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.7);
+}
+
+/* Overlay au survol */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 10px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.subcategory:hover .overlay {
+  transform: translateY(0%);
+}
+
+.subcategory span {
+  display: block;
+  padding: 10px;
+  background: #fafafa;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Bouton WhatsApp */
+.btn-wp {
+  display: inline-block;
+  margin-top: 8px;
+  background-color: #25D366;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-wp:hover {
+  background-color: #1ebe5d;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .subcategory {
+    width: calc(33.33% - 13.33px);
+  }
+}
+
+@media (max-width: 768px) {
+  .subcategory {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 500px) {
+  .subcategory {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+
+/*espace  footer*/
+.footer {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  padding: 40px 20px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer-section {
+  flex: 1 1 200px;
+}
+
+.footer-section h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #00d084;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: #f1f1f1;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+
+.social-icons a {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+}
+
+/* Couleurs spécifiques */
+.social.facebook {
+  color: #1877F2; /* Bleu Facebook */
+}
+
+.social.instagram {
+  color: #E4405F; /* Rose Instagram */
+  
+}
+
+.social.twitter {
+  color: #1DA1F2; /* Bleu Twitter */
+}
+
+.social.youtube {
+  color: #FF0000; /* Rouge YouTube */
+}
+
+.social.whatsapp {
+  color: #25D366; /* Vert WhatsApp */
+}
+
+ /*
+.social-icons a:hover {
+  color: #00d084;
+}*/
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  border-top: 1px solid #444;
+  padding-top: 10px;
+}
+.social.instagram {
+  color: transparent;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.social-icons a:hover {
+  animation: pulse 0.4s ease-in-out;
+}
+
+/* Bulle WhatsApp flottante visible sur tous les écrans */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  font-size: 28px;
+  padding: 15px;
+  border-radius: 50%;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: scale(0.5);
+  animation: appear 0.5s ease forwards 1s;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Animation d’apparition */
+@keyframes appear {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+} 
+
+
+
+
