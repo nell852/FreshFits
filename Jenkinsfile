@@ -1,18 +1,35 @@
 pipeline {
     agent any
 
+    environment {
+        // Nom du canal Slack (à adapter si besoin)
+        SLACK_CHANNEL = '#jenkins-builds'
+        // URL du job Jenkins (automatiquement injectée)
+        BUILD_URL = "${env.BUILD_URL}"
+    }
+
     stages {
         stage('Build') {
             steps {
-                echo "Construction du projet..."
-                // Ici, tes étapes de build, compilation, tests, etc.
+                echo "🚧 Construction du projet..."
+                // Tes commandes de build ici
+                sleep(time: 2, unit: 'SECONDS')
             }
         }
-        
-        stage('Test') {
+
+        stage('Tests') {
             steps {
-                echo "Exécution des tests..."
-                // tes tests ici
+                echo "🧪 Exécution des tests..."
+                // Tes tests ici
+                sleep(time: 2, unit: 'SECONDS')
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "🚀 Déploiement en cours..."
+                // Tes commandes de déploiement ici
+                sleep(time: 2, unit: 'SECONDS')
             }
         }
     }
@@ -20,16 +37,37 @@ pipeline {
     post {
         success {
             slackSend(
-                channel: '#jenkins-builds',
-                message: "✅ Build réussi : ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                tokenCredentialId: 'slack-webhook' // ← identifiant du credential que tu as créé
+                channel: "${SLACK_CHANNEL}",
+                color: 'good',
+                message: """✅ *Build réussi !*
+*Projet:* ${env.JOB_NAME}
+*Build:* #${env.BUILD_NUMBER}
+*Durée:* ${currentBuild.durationString}
+🔗 *Lien:* ${env.BUILD_URL}"""
             )
         }
+
         failure {
             slackSend(
-                channel: '#jenkins-builds',
-                message: "❌ Build échoué : ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                tokenCredentialId: 'slack-webhook' // ← identifiant du credential que tu as créé
+                channel: "${SLACK_CHANNEL}",
+                color: 'danger',
+                message: """❌ *Échec du build !*
+*Projet:* ${env.JOB_NAME}
+*Build:* #${env.BUILD_NUMBER}
+*Durée:* ${currentBuild.durationString}
+🔗 *Lien:* ${env.BUILD_URL}"""
+            )
+        }
+
+        unstable {
+            slackSend(
+                channel: "${SLACK_CHANNEL}",
+                color: 'warning',
+                message: """⚠️ *Build instable !*
+*Projet:* ${env.JOB_NAME}
+*Build:* #${env.BUILD_NUMBER}
+*Durée:* ${currentBuild.durationString}
+🔗 *Lien:* ${env.BUILD_URL}"""
             )
         }
     }
