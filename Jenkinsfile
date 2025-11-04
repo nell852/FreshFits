@@ -17,20 +17,20 @@ pipeline {
         }
     }
 
-    // ← POST se place ici, après tous les stages
     post {
         success {
             slackSend(
                 channel: '#jenkins-builds',
-                message: "✅ Build réussi : ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+                message: "✅ Build réussi : ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                tokenCredentialId: 'slack-webhook' // ← identifiant du credential que tu as créé
             )
         }
         failure {
             slackSend(
                 channel: '#jenkins-builds',
-                message: "❌ Build échoué : ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+                message: "❌ Build échoué : ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                tokenCredentialId: 'slack-webhook' // ← identifiant du credential que tu as créé
             )
         }
     }
 }
-
