@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Construction du projet..."
+                // Ici, tes étapes de build, compilation, tests, etc.
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo "Exécution des tests..."
+                // tes tests ici
+            }
+        }
+    }
+
+    // ← POST se place ici, après tous les stages
+    post {
+        success {
+            slackSend(
+                channel: '#jenkins-builds',
+                message: "✅ Build réussi : ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+            )
+        }
+        failure {
+            slackSend(
+                channel: '#jenkins-builds',
+                message: "❌ Build échoué : ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+            )
+        }
+    }
+}
