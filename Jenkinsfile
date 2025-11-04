@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "🚧 Construction du projet..."
+                echo ":construction: Construction du projet..."
                 // Tes commandes de build ici
                 sleep(time: 2, unit: 'SECONDS')
             }
@@ -19,7 +19,7 @@ pipeline {
 
         stage('Tests') {
             steps {
-                echo "🧪 Exécution des tests..."
+                echo ":test_tube: Exécution des tests..."
                 // Tes tests ici
                 sleep(time: 2, unit: 'SECONDS')
             }
@@ -27,7 +27,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo "🚀 Déploiement en cours..."
+                echo ":rocket: Déploiement en cours..."
                 // Tes commandes de déploiement ici
                 sleep(time: 2, unit: 'SECONDS')
             }
@@ -39,11 +39,11 @@ pipeline {
             slackSend(
                 channel: "${SLACK_CHANNEL}",
                 color: 'good',
-                message: """✅ *Build réussi !*
+                message: """:white_check_mark: *Build réussi !*
 *Projet:* ${env.JOB_NAME}
 *Build:* #${env.BUILD_NUMBER}
 *Durée:* ${currentBuild.durationString}
-🔗 *Lien:* ${env.BUILD_URL}"""
+:link: *Lien:* ${env.BUILD_URL}"""
             )
         }
 
@@ -51,11 +51,11 @@ pipeline {
             slackSend(
                 channel: "${SLACK_CHANNEL}",
                 color: 'danger',
-                message: """❌ *Échec du build !*
+                message: """:x: *Échec du build !*
 *Projet:* ${env.JOB_NAME}
 *Build:* #${env.BUILD_NUMBER}
 *Durée:* ${currentBuild.durationString}
-🔗 *Lien:* ${env.BUILD_URL}"""
+:link: *Lien:* ${env.BUILD_URL}"""
             )
         }
 
@@ -63,11 +63,11 @@ pipeline {
             slackSend(
                 channel: "${SLACK_CHANNEL}",
                 color: 'warning',
-                message: """⚠️ *Build instable !*
+                message: """:warning: *Build instable !*
 *Projet:* ${env.JOB_NAME}
 *Build:* #${env.BUILD_NUMBER}
 *Durée:* ${currentBuild.durationString}
-🔗 *Lien:* ${env.BUILD_URL}"""
+:link: *Lien:* ${env.BUILD_URL}"""
             )
         }
     }
