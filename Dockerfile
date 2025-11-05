@@ -1,8 +1,8 @@
 FROM nginx:alpine
 LABEL maintainer="Nell"
 
-# Copier le site statique dans Nginx
-COPY ./FreshFits /usr/share/nginx/html
+# Copier tout le contenu du contexte dans Nginx
+COPY . /usr/share/nginx/html
 
 # Permissions pour Nginx
 RUN chmod -R 755 /usr/share/nginx/html
